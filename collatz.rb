@@ -1,6 +1,6 @@
 # The following iterative sequence is defined for the set of positive integers:
 
-# Given the number n in the collatz sequence,
+# Given the number n in the Collatz sequence,
 # if n is even, the next number in the sequence is n/2
 # if n is odd, the next number in the sequence is 3n + 1
 

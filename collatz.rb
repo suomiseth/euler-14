@@ -1,6 +1,7 @@
 # The following iterative sequence is defined for the set of positive integers:
 
-# n ->n/2 (n is even) n ->3n + 1 (n is odd)
+# if n is even, the next number in the sequence is n/2
+# if n is odd, the next number in the sequence is 3n + 1
 
 # Using the rule above and starting with 13, we generate the following sequence:
 

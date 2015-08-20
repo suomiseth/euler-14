@@ -1,14 +1,38 @@
-# The following iterative sequence is defined for the set of positive integers:
+class Collatz
+  @@path_count_hash = Hash.new
 
-# Given a number n in the Collatz sequence,
-# if n is even, the next number in the sequence is n/2
-# if n is odd, the next number in the sequence is 3n + 1
+  def initialize(num)
+    @num = num
+  end
 
-# Applying the rule above with the starting number 13, we generate the following sequence:
+  def sequence_array
+    number = @num
+    temp_arr = []
+    while number != 1 && !(@@path_count_hash.has_key?(number))
+      temp_arr << number
+      if number % 2 == 0
+        number = number / 2
+      else
+        number = number * 3 + 1
+      end
+    end
 
-# 13 40 20 10 5 16 8 4 2 1 It can be seen that this sequence (starting at 13 and 
-# finishing at 1) contains 10 terms. Although it has not been proved yet 
-# (Collatz Problem), it is thought that all starting numbers finish at 1.
+    if number == 1
+      @@path_count_hash[@num] = temp_arr.size + 1
+    else
+      @@path_count_hash[@num] = temp_arr.size + @@path_count_hash[number]
+    end
+  end
 
-# Which starting number, under one million, produces the longest chain?
+  def self.find_longest(limit)
+    (1..limit).each {|n| Collatz.new(n).sequence_array}
+    @@path_count_hash.max_by {|k,v| v}[0]
+  end
+end
 
+puts "what is the limit you want to do collatz to?"
+limit = gets.strip.to_i
+puts "the longest is number: #{Collatz.find_longest(limit)}."
+
+
+### right answer = 837799
